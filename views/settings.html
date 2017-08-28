@@ -27,12 +27,19 @@
                                     </td>
                                 </tr>
 
-                                    <tr>
-                                        <td>OSC port number:</td>
-                                        <td>
-                                            <input type="text" name="oscPort" value=<%= rpi.osc_port %>>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>OSC port number:</td>
+                                    <td>
+                                        <input type="text" name="oscPort" value=<%= rpi.osc_port %>>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Temperature value:</td>
+                                    <td>
+                                        <%= rpi.temperature_value %>
+                                    </td>
+                                </tr>
 
                                 <tr>
                                     <td>Temperature interval:</td>
@@ -46,6 +53,13 @@
                                     <td>
                                         <input type="checkbox" name="temperatureMQTT" value="temperatureMQTT" <% if (rpi.temperature_mqtt) {%> checked <%}%>> MQTT</br>
                                         <input type="checkbox" name="temperatureOSC" value="temperatureOSC" <% if (rpi.temperature_osc) {%> checked <%}%>> OSC</br>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Pressure value:</td>
+                                    <td>
+                                        <%= rpi.pressure_value %>
                                     </td>
                                 </tr>
 
@@ -65,6 +79,13 @@
                                 </tr>
 
                                 <tr>
+                                    <td>Light value:</td>
+                                    <td>
+                                        <%= rpi.light_value %>
+                                    </td>
+                                </tr>
+
+                                <tr>
                                     <td>Light level interval:</td>
                                     <td>
                                         <input type="text" name="lightInterval" value=<%= rpi.light_interval %>>
@@ -76,6 +97,13 @@
                                     <td>
                                         <input type="checkbox" name="lightMQTT" value="lightMQTT" <% if (rpi.light_mqtt) {%> checked <%}%>> MQTT</br>
                                         <input type="checkbox" name="lightOSC" value="lightOSC" <% if (rpi.light_osc) {%> checked <%}%>> OSC</br>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Pedestrian count:</td>
+                                    <td>
+                                        <%= rpi.pedestrians_value %>
                                     </td>
                                 </tr>
 

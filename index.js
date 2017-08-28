@@ -39,15 +39,19 @@ var rpis = [
         status: false,
         last_hearbeat: 0,
         osc_port: 5005,
+        temperature_value: 0,
         temperature_interval: 5,
         temperature_mqtt: true,
         temperature_osc: false,
+        pressure_value: 0,
         pressure_interval: 5,
         pressure_mqtt: true,
         pressure_osc: false,
+        light_value: 0,
         light_interval: 5,
         light_mqtt: true,
         light_osc: false,
+        pedestrians_value: 0,
         pedestrians_interval: 5,
         pedestrians_mqtt: true,
         pedestrians_osc: false
@@ -57,15 +61,19 @@ var rpis = [
         status: false,
         last_hearbeat: 0,
         osc_port: 5005,
+        temperature_value: 0,
         temperature_interval: 5,
         temperature_mqtt: true,
         temperature_osc: false,
+        pressure_value: 0,
         pressure_interval: 5,
         pressure_mqtt: true,
         pressure_osc: false,
+        light_value: 0,
         light_interval: 5,
         light_mqtt: true,
         light_osc: false,
+        pedestrians_value: 0,
         pedestrians_interval: 5,
         pedestrians_mqtt: true,
         pedestrians_osc: false
@@ -75,15 +83,19 @@ var rpis = [
         status: false,
         last_hearbeat: 0,
         osc_port: 5005,
+        temperature_value: 0,
         temperature_interval: 5,
         temperature_mqtt: true,
         temperature_osc: false,
+        pressure_value: 0,
         pressure_interval: 5,
         pressure_mqtt: true,
         pressure_osc: false,
+        light_value: 0,
         light_interval: 5,
         light_mqtt: true,
         light_osc: false,
+        pedestrians_value: 0,
         pedestrians_interval: 5,
         pedestrians_mqtt: true,
         pedestrians_osc: false
@@ -93,15 +105,19 @@ var rpis = [
         status: false,
         last_hearbeat: 0,
         osc_port: 5005,
+        temperature_value: 0,
         temperature_interval: 5,
         temperature_mqtt: true,
         temperature_osc: false,
+        pressure_value: 0,
         pressure_interval: 5,
         pressure_mqtt: true,
         pressure_osc: false,
+        light_value: 0,
         light_interval: 5,
         light_mqtt: true,
         light_osc: false,
+        pedestrians_value: 0,
         pedestrians_interval: 5,
         pedestrians_mqtt: true,
         pedestrians_osc: false
@@ -111,15 +127,19 @@ var rpis = [
         status: false,
         last_hearbeat: 0,
         osc_port: 5005,
+        temperature_value: 0,
         temperature_interval: 5,
         temperature_mqtt: true,
         temperature_osc: false,
+        pressure_value: 0,
         pressure_interval: 5,
         pressure_mqtt: true,
         pressure_osc: false,
+        light_value: 0,
         light_interval: 5,
         light_mqtt: true,
         light_osc: false,
+        pedestrians_value: 0,
         pedestrians_interval: 5,
         pedestrians_mqtt: true,
         pedestrians_osc: false
@@ -129,15 +149,19 @@ var rpis = [
         status: false,
         last_hearbeat: 0,
         osc_port: 5005,
+        temperature_value: 0,
         temperature_interval: 5,
         temperature_mqtt: true,
         temperature_osc: false,
+        pressure_value: 0,
         pressure_interval: 5,
         pressure_mqtt: true,
         pressure_osc: false,
+        light_value: 0,
         light_interval: 5,
         light_mqtt: true,
         light_osc: false,
+        pedestrians_value: 0,
         pedestrians_interval: 5,
         pedestrians_mqtt: true,
         pedestrians_osc: false
@@ -147,15 +171,19 @@ var rpis = [
         status: false,
         last_hearbeat: 0,
         osc_port: 5005,
+        temperature_value: 0,
         temperature_interval: 5,
         temperature_mqtt: true,
         temperature_osc: false,
+        pressure_value: 0,
         pressure_interval: 5,
         pressure_mqtt: true,
         pressure_osc: false,
+        light_value: 0,
         light_interval: 5,
         light_mqtt: true,
         light_osc: false,
+        pedestrians_value: 0,
         pedestrians_interval: 5,
         pedestrians_mqtt: true,
         pedestrians_osc: false
@@ -165,15 +193,19 @@ var rpis = [
         status: false,
         last_hearbeat: 0,
         osc_port: 5005,
+        temperature_value: 0,
         temperature_interval: 5,
         temperature_mqtt: true,
         temperature_osc: false,
+        pressure_value: 0,
         pressure_interval: 5,
         pressure_mqtt: true,
         pressure_osc: false,
+        light_value: 0,
         light_interval: 5,
         light_mqtt: true,
         light_osc: false,
+        pedestrians_value: 0,
         pedestrians_interval: 5,
         pedestrians_mqtt: true,
         pedestrians_osc: false
@@ -183,15 +215,19 @@ var rpis = [
         status: false,
         last_hearbeat: 0,
         osc_port: 5005,
+        temperature_value: 0,
         temperature_interval: 5,
         temperature_mqtt: true,
         temperature_osc: false,
+        pressure_value: 0,
         pressure_interval: 5,
         pressure_mqtt: true,
         pressure_osc: false,
+        light_value: 0,
         light_interval: 5,
         light_mqtt: true,
         light_osc: false,
+        pedestrians_value: 0,
         pedestrians_interval: 5,
         pedestrians_mqtt: true,
         pedestrians_osc: false
@@ -324,16 +360,25 @@ var client  = mqtt.connect('mqtt://127.0.0.1')
 
 client.on('connect', function () {
     client.subscribe('parken/rpi/+/heartbeat')
+    client.subscribe('parken/rpi/+/temperature')
+    client.subscribe('parken/rpi/+/pressure')
+    client.subscribe('parken/rpi/+/light')
+    client.subscribe('parken/rpi/+/pedestrians')
 });
 
 client.on('message', function (topic, message) {
 
     var hearbeat = new RegExp("parken/rpi/[0-9]+/heartbeat");
+    var temperature = new RegExp("parken/rpi/[0-9]+/temperature");
+    var pressure = new RegExp("parken/rpi/[0-9]+/pressure");
+    var light = new RegExp("parken/rpi/[0-9]+/light");
+    var pedestrians = new RegExp("parken/rpi/[0-9]+/pedestrians");
+
+    var id = parseInt( topic.toString().split('/')[2] );
+
     if ( hearbeat.test(topic.toString()) ) {
 
         // console.log( topic + " " + message.toString() )
-
-        var id = parseInt( topic.toString().split('/')[2] );
 
         rpis[id - 1].last_hearbeat = get_time();
 
@@ -359,8 +404,23 @@ client.on('message', function (topic, message) {
         rpis[id - 1].pedestrians_mqtt = values[11] == 1;
         rpis[id - 1].pedestrians_osc = values[12] == 1;
 
-    }
+    } else if ( temperature.test(topic.toString()) ) {
 
+        rpis[id - 1].temperature_value = parseFloat(message.toString());
+
+    } else if ( pressure.test(topic.toString()) ) {
+
+        rpis[id - 1].pressure_value = parseFloat(message.toString());
+
+    } else if ( light.test(topic.toString()) ) {
+
+        rpis[id - 1].light_value = parseFloat(message.toString());
+
+    } else if ( pedestrians.test(topic.toString()) ) {
+
+        rpis[id - 1].pedestrians_value = parseInt(message.toString());
+
+    }
 });
 
 /* istanbul ignore next */
