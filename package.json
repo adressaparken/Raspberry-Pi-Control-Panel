@@ -1,17 +1,17 @@
 {
-  "name": "web_app_2",
+  "name": "parken_rpi_control",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "ejs": "^2.5.7",
     "express": "^4.15.4",
-    "mqtt": "^2.11.0"
+    "mqtt": "^2.12.0"
   }
 }
