@@ -331,7 +331,7 @@ client.on('message', function (topic, message) {
     var hearbeat = new RegExp("parken/rpi/[0-9]+/heartbeat");
     if ( hearbeat.test(topic.toString()) ) {
 
-        console.log( topic + " " + message.toString() )
+        // console.log( topic + " " + message.toString() )
 
         var id = parseInt( topic.toString().split('/')[2] );
 
