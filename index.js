@@ -300,8 +300,8 @@ app.post('/change_global_settings', function(req, res, next){
     var pedestrians_mqtt = (req.body.pedestriansMQTT != undefined ? 1 : 0);
     var pedestrians_osc = (req.body.pedestriansOSC != undefined ? 1 : 0);
 
-    var decibel_mqtt = (req.body.decibelMQTT != undefined ? 1 : 0);
-    var decibel_osc = (req.body.decibelOSC != undefined ? 1 : 0);
+    // var decibel_mqtt = (req.body.decibelMQTT != undefined ? 1 : 0);
+    // var decibel_osc = (req.body.decibelOSC != undefined ? 1 : 0);
 
     var s = osc_port + ','
 
@@ -319,10 +319,10 @@ app.post('/change_global_settings', function(req, res, next){
 
     s += pedestrians_interval + ','
     s += pedestrians_mqtt + ','
-    s += pedestrians_osc + ','
+    s += pedestrians_osc
 
-    s += decibel_mqtt + ','
-    s += decibel_osc
+    // s += decibel_mqtt + ','
+    // s += decibel_osc
 
     for (i = 1; i < 10; i++) {
         client.publish('parken/rpi/' + i + '/settings', s)
@@ -358,8 +358,8 @@ app.post('/change_settings', function(req, res, next){
     var pedestrians_mqtt = (req.body.pedestriansMQTT != undefined ? 1 : 0);
     var pedestrians_osc = (req.body.pedestriansOSC != undefined ? 1 : 0);
 
-    var decibel_mqtt = (req.body.decibelMQTT != undefined ? 1 : 0);
-    var decibel_osc = (req.body.decibelOSC != undefined ? 1 : 0);
+    // var decibel_mqtt = (req.body.decibelMQTT != undefined ? 1 : 0);
+    // var decibel_osc = (req.body.decibelOSC != undefined ? 1 : 0);
 
     var s = osc_port + ','
 
@@ -377,10 +377,10 @@ app.post('/change_settings', function(req, res, next){
 
     s += pedestrians_interval + ','
     s += pedestrians_mqtt + ','
-    s += pedestrians_osc + ','
+    s += pedestrians_osc
 
-    s += decibel_mqtt + ','
-    s += decibel_osc
+    // s += decibel_mqtt + ','
+    // s += decibel_osc
 
     client.publish('parken/rpi/' + id + '/settings', s)
 

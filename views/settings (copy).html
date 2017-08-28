@@ -123,6 +123,21 @@
                                 </tr>
 
                                 <tr>
+                                    <td>Decibel level:</td>
+                                    <td>
+                                        <%= rpi.decibel_value %>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Decibel level broadcast:</td>
+                                    <td>
+                                        <input type="checkbox" name="decibelMQTT" value="decibelMQTT" <% if (rpi.decibel_mqtt) {%> checked <%}%>> MQTT</br>
+                                        <input type="checkbox" name="decibelOSC" value="decibelOSC" <% if (rpi.decibel_osc) {%> checked <%}%>> OSC</br>
+                                    </td>
+                                </tr>
+
+                                <tr>
                                     <td width="25%">Submit:</td>
                                     <td>
                                         <input type="submit" value="Save">
