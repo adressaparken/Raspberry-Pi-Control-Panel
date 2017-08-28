@@ -331,6 +331,8 @@ client.on('message', function (topic, message) {
     var hearbeat = new RegExp("parken/rpi/[0-9]+/heartbeat");
     if ( hearbeat.test(topic.toString()) ) {
 
+        console.log( topic + " " + message.toString() )
+
         var id = parseInt( topic.toString().split('/')[2] );
 
         rpis[id - 1].last_hearbeat = get_time();
