@@ -54,7 +54,11 @@ var rpis = [
         pedestrians_value: 0,
         pedestrians_interval: 5,
         pedestrians_mqtt: true,
-        pedestrians_osc: false
+        pedestrians_osc: false,
+        decibel_value: 0,
+        decibel_interval: 5,
+        decibel_mqtt: true,
+        decibel_osc: false
     },
     {
         id: 2,
@@ -76,7 +80,11 @@ var rpis = [
         pedestrians_value: 0,
         pedestrians_interval: 5,
         pedestrians_mqtt: true,
-        pedestrians_osc: false
+        pedestrians_osc: false,
+        decibel_value: 0,
+        decibel_interval: 5,
+        decibel_mqtt: true,
+        decibel_osc: false
     },
     {
         id: 3,
@@ -98,7 +106,11 @@ var rpis = [
         pedestrians_value: 0,
         pedestrians_interval: 5,
         pedestrians_mqtt: true,
-        pedestrians_osc: false
+        pedestrians_osc: false,
+        decibel_value: 0,
+        decibel_interval: 5,
+        decibel_mqtt: true,
+        decibel_osc: false
     },
     {
         id: 4,
@@ -120,7 +132,11 @@ var rpis = [
         pedestrians_value: 0,
         pedestrians_interval: 5,
         pedestrians_mqtt: true,
-        pedestrians_osc: false
+        pedestrians_osc: false,
+        decibel_value: 0,
+        decibel_interval: 5,
+        decibel_mqtt: true,
+        decibel_osc: false
     },
     {
         id: 5,
@@ -142,7 +158,11 @@ var rpis = [
         pedestrians_value: 0,
         pedestrians_interval: 5,
         pedestrians_mqtt: true,
-        pedestrians_osc: false
+        pedestrians_osc: false,
+        decibel_value: 0,
+        decibel_interval: 5,
+        decibel_mqtt: true,
+        decibel_osc: false
     },
     {
         id: 6,
@@ -164,7 +184,11 @@ var rpis = [
         pedestrians_value: 0,
         pedestrians_interval: 5,
         pedestrians_mqtt: true,
-        pedestrians_osc: false
+        pedestrians_osc: false,
+        decibel_value: 0,
+        decibel_interval: 5,
+        decibel_mqtt: true,
+        decibel_osc: false
     },
     {
         id: 7,
@@ -186,7 +210,11 @@ var rpis = [
         pedestrians_value: 0,
         pedestrians_interval: 5,
         pedestrians_mqtt: true,
-        pedestrians_osc: false
+        pedestrians_osc: false,
+        decibel_value: 0,
+        decibel_interval: 5,
+        decibel_mqtt: true,
+        decibel_osc: false
     },
     {
         id: 8,
@@ -208,7 +236,11 @@ var rpis = [
         pedestrians_value: 0,
         pedestrians_interval: 5,
         pedestrians_mqtt: true,
-        pedestrians_osc: false
+        pedestrians_osc: false,
+        decibel_value: 0,
+        decibel_interval: 5,
+        decibel_mqtt: true,
+        decibel_osc: false
     },
     {
         id: 9,
@@ -230,7 +262,11 @@ var rpis = [
         pedestrians_value: 0,
         pedestrians_interval: 5,
         pedestrians_mqtt: true,
-        pedestrians_osc: false
+        pedestrians_osc: false,
+        decibel_value: 0,
+        decibel_interval: 5,
+        decibel_mqtt: true,
+        decibel_osc: false
     }
 ];
 
@@ -264,6 +300,9 @@ app.post('/change_global_settings', function(req, res, next){
     var pedestrians_mqtt = (req.body.pedestriansMQTT != undefined ? 1 : 0);
     var pedestrians_osc = (req.body.pedestriansOSC != undefined ? 1 : 0);
 
+    var decibel_mqtt = (req.body.decibelMQTT != undefined ? 1 : 0);
+    var decibel_osc = (req.body.decibelOSC != undefined ? 1 : 0);
+
     var s = osc_port + ','
 
     s += temperature_interval + ','
@@ -280,7 +319,10 @@ app.post('/change_global_settings', function(req, res, next){
 
     s += pedestrians_interval + ','
     s += pedestrians_mqtt + ','
-    s += pedestrians_osc
+    s += pedestrians_osc + ','
+
+    s += decibel_mqtt + ','
+    s += decibel_osc
 
     for (i = 1; i < 10; i++) {
         client.publish('parken/rpi/' + i + '/settings', s)
@@ -316,6 +358,9 @@ app.post('/change_settings', function(req, res, next){
     var pedestrians_mqtt = (req.body.pedestriansMQTT != undefined ? 1 : 0);
     var pedestrians_osc = (req.body.pedestriansOSC != undefined ? 1 : 0);
 
+    var decibel_mqtt = (req.body.decibelMQTT != undefined ? 1 : 0);
+    var decibel_osc = (req.body.decibelOSC != undefined ? 1 : 0);
+
     var s = osc_port + ','
 
     s += temperature_interval + ','
@@ -332,7 +377,10 @@ app.post('/change_settings', function(req, res, next){
 
     s += pedestrians_interval + ','
     s += pedestrians_mqtt + ','
-    s += pedestrians_osc
+    s += pedestrians_osc + ','
+
+    s += decibel_mqtt + ','
+    s += decibel_osc
 
     client.publish('parken/rpi/' + id + '/settings', s)
 
@@ -364,6 +412,7 @@ client.on('connect', function () {
     client.subscribe('parken/rpi/+/pressure')
     client.subscribe('parken/rpi/+/light')
     client.subscribe('parken/rpi/+/pedestrians')
+    client.subscribe('parken/rpi/+/decibel')
 });
 
 client.on('message', function (topic, message) {
@@ -373,6 +422,7 @@ client.on('message', function (topic, message) {
     var pressure = new RegExp("parken/rpi/[0-9]+/pressure");
     var light = new RegExp("parken/rpi/[0-9]+/light");
     var pedestrians = new RegExp("parken/rpi/[0-9]+/pedestrians");
+    var decibel = new RegExp("parken/rpi/[0-9]+/decibel");
 
     var id = parseInt( topic.toString().split('/')[2] );
 
@@ -419,6 +469,10 @@ client.on('message', function (topic, message) {
     } else if ( pedestrians.test(topic.toString()) ) {
 
         rpis[id - 1].pedestrians_value = parseInt(message.toString());
+
+    } else if ( decibel.test(topic.toString()) ) {
+
+        rpis[id - 1].decibel_value = parseInt(message.toString());
 
     }
 });
