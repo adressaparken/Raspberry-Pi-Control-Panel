@@ -135,7 +135,7 @@ function get_time() {
 var myInt = setInterval(function () {
     rpis.forEach(function(rpi) {
         if (get_time() >= rpi.last_hearbeat + 300) {
-            // rpi.status = false                                               // TODO CHANGE BACK!!!!!!!!!!!
+            rpi.status = false
         }
     });
 }, 20000);
