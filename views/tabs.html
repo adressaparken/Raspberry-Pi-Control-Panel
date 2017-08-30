@@ -1,0 +1,227 @@
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Global')" id="GlobalTab">Global</button>
+  <% rpis.forEach((rpi) => { %>
+    <button class="tablinks <% if (!rpi.status) {%> offline <%}%>" onclick="openTab(event, 'RPi<%= rpi.id %>')" id="RPi<%= rpi.id %>Tab">RPi #<%= rpi.id %></button>
+  <% }) %>
+</div>
+
+<div id="Global" class="tabcontent">
+  <h3>Raspberry Pi status:</h3>
+  <p>
+    <% rpis.forEach((rpi) => { %>
+      <table class="greyGridTable">
+        <tr>
+          <td width="250px">Raspberry Pi #<%= rpi.id %>:</td>
+          <td>
+            <% if (rpi.status) {%> online. <%} else {%> offline. Last seen: <%= new Date(rpi.last_hearbeat * 1000).toISOString().replace(/T/, ' ').replace(/\..+/, '') %> <% } %>
+          </td>
+        </tr>
+      </table>
+    <% }) %>
+  </p>
+
+  <h3>Global settings:</h3>
+  <p>
+    <form name="form1" method="POST" action="/">
+      <input type="hidden" name="id" value=0>
+      <table class="greyGridTable">
+
+        <tr>
+          <td width="250px">OSC port number:</td>
+          <td>
+            <input type="text" name="oscPort" value=<%= rpis[0].osc_port %>>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Temperature broacasting interval:</td>
+          <td>
+            <input type="text" name="temperatureInterval" value=<%= rpis[0].temperature_interval %>>
+            <input type="checkbox" name="temperatureMQTT" value="temperatureMQTT" <% if (rpis[0].temperature_mqtt) {%> checked <%}%>> MQTT
+            <input type="checkbox" name="temperatureOSC" value="temperatureOSC" <% if (rpis[0].temperature_osc) {%> checked <%}%>> OSC
+          </td>
+        </tr>
+
+        <tr>
+          <td>Pressure broacasting interval:</td>
+          <td>
+            <input type="text" name="pressureInterval" value=<%= rpis[0].pressure_interval %>>
+            <input type="checkbox" name="pressureMQTT" value="pressureMQTT" <% if (rpis[0].pressure_mqtt) {%> checked <%}%>> MQTT
+            <input type="checkbox" name="pressureOSC" value="pressureOSC" <% if (rpis[0].pressure_osc) {%> checked <%}%>> OSC
+          </td>
+        </tr>
+
+        <tr>
+          <td>Light broacasting interval:</td>
+          <td>
+            <input type="text" name="lightInterval" value=<%= rpis[0].light_interval %>>
+            <input type="checkbox" name="lightMQTT" value="lightMQTT" <% if (rpis[0].light_mqtt) {%> checked <%}%>> MQTT
+            <input type="checkbox" name="lightOSC" value="lightOSC" <% if (rpis[0].light_osc) {%> checked <%}%>> OSC
+          </td>
+        </tr>
+
+        <tr>
+          <td>Pedestrian broacasting interval:</td>
+          <td>
+            <input type="text" name="pedestriansInterval" value=<%= rpis[0].pedestrians_interval %>>
+            <input type="checkbox" name="pedestriansMQTT" value="pedestriansMQTT" <% if (rpis[0].pedestrians_mqtt) {%> checked <%}%>> MQTT
+            <input type="checkbox" name="pedestriansOSC" value="pedestriansOSC" <% if (rpis[0].pedestrians_osc) {%> checked <%}%>> OSC
+          </td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td>
+            <input type="submit" value="Save">
+          </td>
+        </tr>
+
+      </table>
+    </form>
+  </p>
+
+</div>
+
+<% rpis.forEach((rpi) => { %>
+  <div id="RPi<%= rpi.id %>" class="tabcontent">
+    <h3>Raspberry Pi #<%= rpi.id %> is currently <% if (rpi.status) {%> online. <%} else {%> offline. <% } %></h3>
+
+    <% if (!rpi.status) {%>
+
+      <div class="text">
+        <p>Last seen: <%= new Date(rpi.last_hearbeat * 1000).toISOString().replace(/T/, ' ').replace(/\..+/, '') %></p>
+        <p>Settings cannot be changed for offline Raspberry Pis.</br>
+        If it does not come online in the next 10 minutes, please contact the system administrator.</br>
+        Sorry for the inconvenience!</p>
+      </div>
+
+    <% } else { %>
+
+      <p>
+        <table class="greyGridTable">
+
+          <tr>
+            <td width="250px">Last heartbeat message received:</td>
+            <td>
+              <%= new Date(rpi.last_hearbeat * 1000).toISOString().replace(/T/, ' ').replace(/\..+/, '') %>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Temperature:</td>
+            <td>
+              <%= rpi.temperature_value %> &#x2103;
+            </td>
+          </tr>
+
+          <tr>
+            <td>Pressure:</td>
+            <td>
+              <%= rpi.pressure_value %> hPa
+            </td>
+          </tr>
+
+          <tr>
+            <td>Light:</td>
+            <td>
+              <%= rpi.light_value %> lux
+            </td>
+          </tr>
+
+          <tr>
+            <td>Pedestrian count:</td>
+            <td>
+              <%= rpi.pedestrians_value %>
+            </td>
+          </tr>
+
+        </table>
+      </p>
+
+      <p>
+        <form name="form1" method="POST" action="/">
+          <input type="hidden" name="id" value=<%= rpi.id %>>
+          <table class="greyGridTable">
+
+            <tr>
+              <td width="250px">OSC port number:</td>
+              <td>
+                <input type="text" name="oscPort" value=<%= rpi.osc_port %>>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Temperature broacasting interval:</td>
+              <td>
+                <input type="text" name="temperatureInterval" value=<%= rpi.temperature_interval %>>
+                <input type="checkbox" name="temperatureMQTT" value="temperatureMQTT" <% if (rpi.temperature_mqtt) {%> checked <%}%>> MQTT
+                <input type="checkbox" name="temperatureOSC" value="temperatureOSC" <% if (rpi.temperature_osc) {%> checked <%}%>> OSC
+              </td>
+            </tr>
+
+            <tr>
+              <td>Pressure broacasting interval:</td>
+              <td>
+                <input type="text" name="pressureInterval" value=<%= rpi.pressure_interval %>>
+                <input type="checkbox" name="pressureMQTT" value="pressureMQTT" <% if (rpi.pressure_mqtt) {%> checked <%}%>> MQTT
+                <input type="checkbox" name="pressureOSC" value="pressureOSC" <% if (rpi.pressure_osc) {%> checked <%}%>> OSC
+              </td>
+            </tr>
+
+            <tr>
+              <td>Light broacasting interval:</td>
+              <td>
+                <input type="text" name="lightInterval" value=<%= rpi.light_interval %>>
+                <input type="checkbox" name="lightMQTT" value="lightMQTT" <% if (rpi.light_mqtt) {%> checked <%}%>> MQTT
+                <input type="checkbox" name="lightOSC" value="lightOSC" <% if (rpi.light_osc) {%> checked <%}%>> OSC
+              </td>
+            </tr>
+
+            <tr>
+              <td>Pedestrian broacasting interval:</td>
+              <td>
+                <input type="text" name="pedestriansInterval" value=<%= rpi.pedestrians_interval %>>
+                <input type="checkbox" name="pedestriansMQTT" value="pedestriansMQTT" <% if (rpi.pedestrians_mqtt) {%> checked <%}%>> MQTT
+                <input type="checkbox" name="pedestriansOSC" value="pedestriansOSC" <% if (rpi.pedestrians_osc) {%> checked <%}%>> OSC
+              </td>
+            </tr>
+
+            <tr>
+              <td></td>
+              <td>
+                <input type="submit" value="Save">
+              </td>
+            </tr>
+
+          </table>
+        </form>
+      </p>
+
+    <% } %>
+  </div>
+<% }) %>
+
+<script>
+  function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+
+    localStorage.activeTab = tabName + "Tab";
+  }
+
+  if (localStorage.activeTab) {
+    document.getElementById(localStorage.activeTab).click();
+  } else {
+    localStorage.activeTab = "GlobalTab"
+    document.getElementById(localStorage.activeTab).click();
+  }
+</script>

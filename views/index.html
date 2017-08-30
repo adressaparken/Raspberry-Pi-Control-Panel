@@ -1,15 +1,15 @@
 <% include header.html %>
 
 <div class="container">
-    <h2><%= title %></h2>
-    <p></p>
-    <div class="panel-group" id="accordion">
 
-        <% include global_settings.html %>
+  <h1>Parken Raspberry Pi Control Panel</h1>
+  <p>You can change settings for all Raspberry pis in the global tab and 
+    individual settings in the respective tabs.</br>
+    After applying the changes, the page will take a few seconds to reload
+    the changes.</p>
 
-        <% include settings.html %>
+  <% include tabs.html %>
 
-    </div>
 </div>
 
 <% include footer.html %>

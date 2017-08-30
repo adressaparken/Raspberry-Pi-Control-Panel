@@ -1,11 +1,73 @@
 body {
   padding: 50px 80px;
-  font: 14px "Helvetica Nueue", "Lucida Grande", Arial, sans-serif;
+  font: 13px "Helvetica Nueue", "Lucida Grande", Arial, sans-serif;
+}
+
+div.container {
+  width: 70%;
+
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  margin: auto;
+}
+
+div.center {
+
+}
+
+/* Style the tab */
+div.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none:
+    align: center:
+}
+
+div.tab .offline {
+  /*background-color: #ff6b6b;*/
+}
+
+div.text {
+
 }
 
 table.greyGridTable {
   border: 2px solid #FFFFFF;
-  width: 100%;
+  width: 80%;
   text-align: left;
   border-collapse: collapse;
 }
@@ -15,10 +77,13 @@ table.greyGridTable td, table.greyGridTable th {
 }
 table.greyGridTable tbody td {
   font-size: 13px;
-  vertical-align: top;
+  vertical-align: middle;
 }
 table.greyGridTable td:nth-child(even) {
   background: #EBEBEB;
+}
+table.greyGridTable td:nth-child(odd) {
+  text-align: right;
 }
 table.greyGridTable thead {
   background: #FFFFFF;
