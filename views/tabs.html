@@ -231,17 +231,13 @@
 <script>
   function reloadTimer() {
     setInterval(function(){
-      alert("FUCK");
-    }, 5000);
+      $.post("/", {
+        id: -1,
+        openTab: localStorage.activeTab
+      },
+      function(data) {
+        alert(JSON.stringify(data))
+      });
+    }, 10000);
   }
-
-//   window.setInterval(function(){
-//     $.post("/", {
-//       id: -1,
-//       title: 'FUCK'},
-//       function(data) {
-//         alert(JSON.stringify(data))
-//     });
-//   }, 10000);
-// }
 </script>
