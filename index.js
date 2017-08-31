@@ -70,11 +70,17 @@ for (i = 1; i < 10; i++) {
 }
 
 app.get('/', function(req, res){
-    res.render('index', {
+    res.render('client', {
         rpis: rpis,
         title: "Raspberry Pi Control Panel",
         header: "Raspberry Pi Control Panel"
     });
+});
+
+app.post('/endpoint', function(req, res){
+	var obj = {};
+	console.log('body: ' + JSON.stringify(req.body));
+	res.send(req.body);
 });
 
 
