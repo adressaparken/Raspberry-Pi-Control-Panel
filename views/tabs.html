@@ -234,6 +234,8 @@ function testFunction() {
   data.title = "title";
   data.message = "message";
 
+  alert(JSON.stringify(data));
+
   $.ajax({
     type: 'POST',
     data: JSON.stringify(data),
