@@ -229,19 +229,16 @@
 </script>
 
 <script>
-$(document).ready(function(){
-  alert('FUCK');
-});
-</script>
-
-<script>
 function testFunction() {
   var data = {};
   data.title = "title";
   data.message = "message";
 
-  $.post("/", {title: 'FUCK'}, function(data) {
-    console.log(data)
+  $.post("/", {
+    id: -1,
+    title: 'FUCK'},
+    function(data) {
+      console.log(data)
   });
 
   // $.ajax({

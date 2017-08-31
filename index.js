@@ -78,9 +78,15 @@ app.get('/', function(req, res){
 });
 
 app.post('/', function(req, res){
-	var obj = {};
-	console.log('body: ' + JSON.stringify(req.body));
-	res.send(req.body);
+
+  var id = parseInt(req.body.id);
+
+  console.log( id.toString() )
+
+  if (id == -1) {
+    console.log('body: ' + JSON.stringify(req.body));
+  	res.send(req.body);
+  }
 });
 
 
