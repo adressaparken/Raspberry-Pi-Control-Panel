@@ -38,24 +38,28 @@ function RPi(id) {
     this.last_hearbeat = 0;
     this.osc_port = 5005;
     this.temperature_value = 0;
+    this.temperature_on_interval = true;
     this.temperature_interval = 5;
     this.temperature_change = false;
     this.temperature_change_threshold = 1.0;
     this.temperature_mqtt = true;
     this.temperature_osc = false;
     this.pressure_value = 0;
+    this.pressure_on_interval = true;
     this.pressure_interval = 5;
     this.pressure_change = false;
     this.pressure_change_threshold = 1.0;
     this.pressure_mqtt = true;
     this.pressure_osc = false;
     this.light_value = 0;
+    this.light_on_interval = true;
     this.light_interval = 5;
     this.light_change = false;
     this.light_change_threshold = 1;
     this.light_mqtt = true;
     this.light_osc = false;
     this.pedestrians_value = 0;
+    this.pedestrians_on_interval = true;
     this.pedestrians_interval = 5;
     this.pedestrians_change = false;
     this.pedestrians_change_threshold = 1;
@@ -92,24 +96,28 @@ app.post('/', function(req, res){
 
     var osc_port = req.body.oscPort
 
+    var temperature_on_interval = (req.body.temperatureOnInterval != undefined ? 1 : 0);
     var temperature_interval = req.body.temperatureInterval;
     var temperature_change = (req.body.temperatureChange != undefined ? 1 : 0);
     var temperature_change_threshold = req.body.temperatureChangeThreshold;
     var temperature_mqtt = (req.body.temperatureMQTT != undefined ? 1 : 0);
     var temperature_osc = (req.body.temperatureOSC != undefined ? 1 : 0);
 
+    var pressure_on_interval = (req.body.pressureOnInterval != undefined ? 1 : 0);
     var pressure_interval = req.body.pressureInterval;
     var pressure_change = (req.body.pressureChange != undefined ? 1 : 0);
     var pressure_change_threshold = req.body.pressureChangeThreshold;
     var pressure_mqtt = (req.body.pressureMQTT != undefined ? 1 : 0);
     var pressure_osc = (req.body.pressureOSC != undefined ? 1 : 0);
 
+    var light_on_interval = (req.body.lightOnInterval != undefined ? 1 : 0);
     var light_interval = req.body.lightInterval;
     var light_change = (req.body.lightChange != undefined ? 1 : 0);
     var light_change_threshold = req.body.lightChangeThreshold;
     var light_mqtt = (req.body.lightMQTT != undefined ? 1 : 0);
     var light_osc = (req.body.lightOSC != undefined ? 1 : 0);
 
+    var pedestrians_on_interval = (req.body.pedestriansOnInterval != undefined ? 1 : 0);
     var pedestrians_interval = req.body.pedestriansInterval;
     var pedestrians_change = (req.body.pedestriansChange != undefined ? 1 : 0);
     var pedestrians_change_threshold = req.body.pedestriansChangeThreshold;
@@ -118,24 +126,28 @@ app.post('/', function(req, res){
 
     var s = osc_port + ','
 
+    s += temperature_on_interval + ','
     s += temperature_interval + ','
     s += temperature_change + ','
     s += temperature_change_threshold + ','
     s += temperature_mqtt + ','
     s += temperature_osc + ','
 
+    s += pressure_on_interval + ','
     s += pressure_interval + ','
     s += pressure_change + ','
     s += pressure_change_threshold + ','
     s += pressure_mqtt + ','
     s += pressure_osc + ','
 
+    s += light_on_interval + ','
     s += light_interval + ','
     s += light_change + ','
     s += light_change_threshold + ','
     s += light_mqtt + ','
     s += light_osc + ','
 
+    s += pedestrians_on_interval + ','
     s += pedestrians_interval + ','
     s += pedestrians_change + ','
     s += pedestrians_change_threshold + ','
@@ -205,29 +217,33 @@ client.on('message', function (topic, message) {
 
         rpis[id - 1].osc_port = parseInt(values[0]);
 
-        rpis[id - 1].temperature_interval = parseInt(values[1]);
-        rpis[id - 1].temperature_change = values[2] == 1;
-        rpis[id - 1].temperature_change_threshold = parseFloat(values[3]);
-        rpis[id - 1].temperature_mqtt = values[4] == 1;
-        rpis[id - 1].temperature_osc = values[5] == 1;
+        rpis[id - 1].temperature_on_interval = values[1] == 1;
+        rpis[id - 1].temperature_interval = parseInt(values[2]);
+        rpis[id - 1].temperature_change = values[3] == 1;
+        rpis[id - 1].temperature_change_threshold = parseFloat(values[4]);
+        rpis[id - 1].temperature_mqtt = values[5] == 1;
+        rpis[id - 1].temperature_osc = values[6] == 1;
 
-        rpis[id - 1].pressure_interval = parseInt(values[6]);
-        rpis[id - 1].pressure_change = values[7] == 1;
-        rpis[id - 1].pressure_change_threshold = parseFloat(values[8]);
-        rpis[id - 1].pressure_mqtt = values[9] == 1;
-        rpis[id - 1].pressure_osc = values[10] == 1;
+        rpis[id - 1].pressure_on_interval = values[7] == 1;
+        rpis[id - 1].pressure_interval = parseInt(values[8]);
+        rpis[id - 1].pressure_change = values[9] == 1;
+        rpis[id - 1].pressure_change_threshold = parseFloat(values[10]);
+        rpis[id - 1].pressure_mqtt = values[11] == 1;
+        rpis[id - 1].pressure_osc = values[12] == 1;
 
-        rpis[id - 1].light_interval = parseInt(values[11]);
-        rpis[id - 1].light_change = values[12] == 1;
-        rpis[id - 1].light_change_threshold = parseInt(values[13]);
-        rpis[id - 1].light_mqtt = values[14] == 1;
-        rpis[id - 1].light_osc = values[15] == 1;
+        rpis[id - 1].light_on_interval = values[13] == 1;
+        rpis[id - 1].light_interval = parseInt(values[14]);
+        rpis[id - 1].light_change = values[15] == 1;
+        rpis[id - 1].light_change_threshold = parseInt(values[16]);
+        rpis[id - 1].light_mqtt = values[17] == 1;
+        rpis[id - 1].light_osc = values[18] == 1;
 
-        rpis[id - 1].pedestrians_interval = parseInt(values[16]);
-        rpis[id - 1].pedestrians_change = values[17] == 1;
-        rpis[id - 1].pedestrians_change_threshold = parseInt(values[18]);
-        rpis[id - 1].pedestrians_mqtt = values[19] == 1;
-        rpis[id - 1].pedestrians_osc = values[20] == 1;
+        rpis[id - 1].pedestrians_on_interval = values[19] == 1;
+        rpis[id - 1].pedestrians_interval = parseInt(values[20]);
+        rpis[id - 1].pedestrians_change = values[21] == 1;
+        rpis[id - 1].pedestrians_change_threshold = parseInt(values[22]);
+        rpis[id - 1].pedestrians_mqtt = values[23] == 1;
+        rpis[id - 1].pedestrians_osc = values[24] == 1;
 
     } else if ( temperature.test(topic.toString()) ) {
 

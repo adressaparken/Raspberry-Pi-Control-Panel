@@ -103,7 +103,9 @@ table.greyGridTable thead th {
 table.greyGridTable thead th:first-child {
   border-left: none;
 }
-
+table.greyGridTable td.sensor_head {
+  font-weight: bold;
+}
 table.greyGridTable tfoot {
   font-size: 14px;
   font-weight: bold;

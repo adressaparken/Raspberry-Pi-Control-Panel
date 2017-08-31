@@ -21,52 +21,111 @@
   </p>
 
   <h3>Global settings:</h3>
-  <button onclick="testFunction()">Click me</button>
   <p>
     <form name="form1" method="POST" action="/">
       <input type="hidden" name="id" value=0>
       <table class="greyGridTable">
 
         <tr>
-          <td width="250px">OSC port number:</td>
+          <td width="250px" class="sensor_head">OSC port number:</td>
           <td>
             <input type="text" name="oscPort" value=<%= rpis[0].osc_port %>>
           </td>
         </tr>
 
         <tr>
-          <td>Temperature broacasting interval:</td>
+          <td class="sensor_head">Temperature broadcasting options:</td>
           <td>
-            <input type="text" name="temperatureInterval" value=<%= rpis[0].temperature_interval %>>
             <input type="checkbox" name="temperatureMQTT" value="temperatureMQTT" <% if (rpis[0].temperature_mqtt) {%> checked <%}%>> MQTT
             <input type="checkbox" name="temperatureOSC" value="temperatureOSC" <% if (rpis[0].temperature_osc) {%> checked <%}%>> OSC
           </td>
         </tr>
 
         <tr>
-          <td>Pressure broacasting interval:</td>
+          <td>Broacasting interval:</td>
           <td>
-            <input type="text" name="pressureInterval" value=<%= rpis[0].pressure_interval %>>
+            <input type="text" name="temperatureInterval" value=<%= rpis[0].temperature_interval %>>
+            <input type="checkbox" name="temperatureOnInterval" value="temperatureOnInterval" <% if (rpis[0].temperature_on_interval) {%> checked <%}%>> enabled
+          </td>
+        </tr>
+
+        <tr>
+          <td>Broadcasting on change:</td>
+          <td>
+            <input type="text" name="temperatureChangeThreshold" value=<%= rpis[0].temperature_change_threshold %>>
+            <input type="checkbox" name="temperatureChange" value="temperatureChange" <% if (rpis[0].temperature_change) {%> checked <%}%>> enabled
+          </td>
+        </tr>
+
+        <tr>
+          <td class="sensor_head">Pressure broadcasting options:</td>
+          <td>
             <input type="checkbox" name="pressureMQTT" value="pressureMQTT" <% if (rpis[0].pressure_mqtt) {%> checked <%}%>> MQTT
             <input type="checkbox" name="pressureOSC" value="pressureOSC" <% if (rpis[0].pressure_osc) {%> checked <%}%>> OSC
           </td>
         </tr>
 
         <tr>
-          <td>Light broacasting interval:</td>
+          <td>Broacasting interval:</td>
           <td>
-            <input type="text" name="lightInterval" value=<%= rpis[0].light_interval %>>
+            <input type="text" name="pressureInterval" value=<%= rpis[0].pressure_interval %>>
+            <input type="checkbox" name="pressureOnInterval" value="pressureOnInterval" <% if (rpis[0].pressure_on_interval) {%> checked <%}%>> enabled
+          </td>
+        </tr>
+
+        <tr>
+          <td>Broadcasting on change:</td>
+          <td>
+            <input type="text" name="pressureChangeThreshold" value=<%= rpis[0].pressure_change_threshold %>>
+            <input type="checkbox" name="pressureChange" value="pressureChange" <% if (rpis[0].pressure_change) {%> checked <%}%>> enabled
+          </td>
+        </tr>
+
+        <tr>
+          <td class="sensor_head">Light level broadcasting options:</td>
+          <td>
             <input type="checkbox" name="lightMQTT" value="lightMQTT" <% if (rpis[0].light_mqtt) {%> checked <%}%>> MQTT
             <input type="checkbox" name="lightOSC" value="lightOSC" <% if (rpis[0].light_osc) {%> checked <%}%>> OSC
           </td>
         </tr>
 
         <tr>
-          <td>Pedestrian broacasting interval:</td>
+          <td>Broacasting interval:</td>
           <td>
-            <input type="text" name="pedestriansInterval" value=<%= rpis[0].pedestrians_interval %>>
+            <input type="text" name="lightInterval" value=<%= rpis[0].light_interval %>>
+            <input type="checkbox" name="lightOnInterval" value="lightOnInterval" <% if (rpis[0].light_on_interval) {%> checked <%}%>> enabled
+          </td>
+        </tr>
+
+        <tr>
+          <td>Broadcasting on change:</td>
+          <td>
+            <input type="text" name="lightChangeThreshold" value=<%= rpis[0].light_change_threshold %>>
+            <input type="checkbox" name="lightChange" value="lightChange" <% if (rpis[0].light_change) {%> checked <%}%>> enabled
+          </td>
+        </tr>
+
+        <tr>
+          <td class="sensor_head">Pedestrian broacasting options:</td>
+          <td>
             <input type="checkbox" name="pedestriansMQTT" value="pedestriansMQTT" <% if (rpis[0].pedestrians_mqtt) {%> checked <%}%>> MQTT
             <input type="checkbox" name="pedestriansOSC" value="pedestriansOSC" <% if (rpis[0].pedestrians_osc) {%> checked <%}%>> OSC
+          </td>
+        </tr>
+
+        <tr>
+          <td>Broacasting interval:</td>
+          <td>
+            <input type="text" name="pedestriansInterval" value=<%= rpis[0].pedestrians_interval %>>
+            <input type="checkbox" name="pedestriansOnInterval" value="pedestriansOnInterval" <% if (rpis[0].pedestrians_on_interval) {%> checked <%}%>> enabled
+          </td>
+        </tr>
+
+        <tr>
+          <td>Broadcasting on change:</td>
+          <td>
+            <input type="text" name="pedestriansChangeThreshold" value=<%= rpis[0].pedestrians_change_threshold %>>
+            <input type="checkbox" name="pedestriansChange" value="pedestriansChange" <% if (rpis[0].pedestrians_change) {%> checked <%}%>> enabled
           </td>
         </tr>
 
@@ -145,45 +204,105 @@
           <table class="greyGridTable">
 
             <tr>
-              <td width="250px">OSC port number:</td>
+              <td width="250px" class="sensor_head">OSC port number:</td>
               <td>
                 <input type="text" name="oscPort" value=<%= rpi.osc_port %>>
               </td>
             </tr>
 
             <tr>
-              <td>Temperature broacasting interval:</td>
+              <td class="sensor_head">Temperature broadcasting options:</td>
               <td>
-                <input type="text" name="temperatureInterval" value=<%= rpi.temperature_interval %>>
                 <input type="checkbox" name="temperatureMQTT" value="temperatureMQTT" <% if (rpi.temperature_mqtt) {%> checked <%}%>> MQTT
                 <input type="checkbox" name="temperatureOSC" value="temperatureOSC" <% if (rpi.temperature_osc) {%> checked <%}%>> OSC
               </td>
             </tr>
 
             <tr>
-              <td>Pressure broacasting interval:</td>
+              <td>Broacasting interval:</td>
               <td>
-                <input type="text" name="pressureInterval" value=<%= rpi.pressure_interval %>>
+                <input type="text" name="temperatureInterval" value=<%= rpi.temperature_interval %>>
+                <input type="checkbox" name="temperatureOnInterval" value="temperatureOnInterval" <% if (rpi.temperature_on_interval) {%> checked <%}%>> enabled
+              </td>
+            </tr>
+
+            <tr>
+              <td>Broadcasting on change:</td>
+              <td>
+                <input type="text" name="temperatureChangeThreshold" value=<%= rpi.temperature_change_threshold %>>
+                <input type="checkbox" name="temperatureChange" value="temperatureChange" <% if (rpi.temperature_change) {%> checked <%}%>> enabled
+              </td>
+            </tr>
+
+            <tr>
+              <td class="sensor_head">Pressure broadcasting options:</td>
+              <td>
                 <input type="checkbox" name="pressureMQTT" value="pressureMQTT" <% if (rpi.pressure_mqtt) {%> checked <%}%>> MQTT
                 <input type="checkbox" name="pressureOSC" value="pressureOSC" <% if (rpi.pressure_osc) {%> checked <%}%>> OSC
               </td>
             </tr>
 
             <tr>
-              <td>Light broacasting interval:</td>
+              <td>Broacasting interval:</td>
               <td>
-                <input type="text" name="lightInterval" value=<%= rpi.light_interval %>>
+                <input type="text" name="pressureInterval" value=<%= rpi.pressure_interval %>>
+                <input type="checkbox" name="pressureOnInterval" value="pressureOnInterval" <% if (rpi.pressure_on_interval) {%> checked <%}%>> enabled
+              </td>
+            </tr>
+
+            <tr>
+              <td>Broadcasting on change:</td>
+              <td>
+                <input type="text" name="pressureChangeThreshold" value=<%= rpi.pressure_change_threshold %>>
+                <input type="checkbox" name="pressureChange" value="pressureChange" <% if (rpi.pressure_change) {%> checked <%}%>> enabled
+              </td>
+            </tr>
+
+            <tr>
+              <td class="sensor_head">Light level broadcasting options:</td>
+              <td>
                 <input type="checkbox" name="lightMQTT" value="lightMQTT" <% if (rpi.light_mqtt) {%> checked <%}%>> MQTT
                 <input type="checkbox" name="lightOSC" value="lightOSC" <% if (rpi.light_osc) {%> checked <%}%>> OSC
               </td>
             </tr>
 
             <tr>
-              <td>Pedestrian broacasting interval:</td>
+              <td>Broacasting interval:</td>
               <td>
-                <input type="text" name="pedestriansInterval" value=<%= rpi.pedestrians_interval %>>
+                <input type="text" name="lightInterval" value=<%= rpi.light_interval %>>
+                <input type="checkbox" name="lightOnInterval" value="lightOnInterval" <% if (rpi.light_on_interval) {%> checked <%}%>> enabled
+              </td>
+            </tr>
+
+            <tr>
+              <td>Broadcasting on change:</td>
+              <td>
+                <input type="text" name="lightChangeThreshold" value=<%= rpi.light_change_threshold %>>
+                <input type="checkbox" name="lightChange" value="lightChange" <% if (rpi.light_change) {%> checked <%}%>> enabled
+              </td>
+            </tr>
+
+            <tr>
+              <td class="sensor_head">Pedestrian broacasting options:</td>
+              <td>
                 <input type="checkbox" name="pedestriansMQTT" value="pedestriansMQTT" <% if (rpi.pedestrians_mqtt) {%> checked <%}%>> MQTT
                 <input type="checkbox" name="pedestriansOSC" value="pedestriansOSC" <% if (rpi.pedestrians_osc) {%> checked <%}%>> OSC
+              </td>
+            </tr>
+
+            <tr>
+              <td>Broacasting interval:</td>
+              <td>
+                <input type="text" name="pedestriansInterval" value=<%= rpi.pedestrians_interval %>>
+                <input type="checkbox" name="pedestriansOnInterval" value="pedestriansOnInterval" <% if (rpi.pedestrians_on_interval) {%> checked <%}%>> enabled
+              </td>
+            </tr>
+
+            <tr>
+              <td>Broadcasting on change:</td>
+              <td>
+                <input type="text" name="pedestriansChangeThreshold" value=<%= rpi.pedestrians_change_threshold %>>
+                <input type="checkbox" name="pedestriansChange" value="pedestriansChange" <% if (rpi.pedestrians_change) {%> checked <%}%>> enabled
               </td>
             </tr>
 
