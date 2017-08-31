@@ -3,6 +3,10 @@ body {
   font: 13px "Helvetica Nueue", "Lucida Grande", Arial, sans-serif;
 }
 
+input[type="text"] {
+    font-size:13px;
+}
+
 div.container {
   width: 70%;
 

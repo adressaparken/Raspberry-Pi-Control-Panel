@@ -81,8 +81,6 @@ app.post('/', function(req, res){
 
   var id = parseInt(req.body.id);
 
-  console.log( id.toString() )
-
   if (id == -1) {
     if (req.body.openTab == "GlobalTab") {
       // todo reload status
