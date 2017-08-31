@@ -70,7 +70,7 @@ for (i = 1; i < 10; i++) {
 }
 
 app.get('/', function(req, res){
-    res.render('client', {
+    res.render('index', {
         rpis: rpis,
         title: "Raspberry Pi Control Panel",
         header: "Raspberry Pi Control Panel"
