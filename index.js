@@ -77,7 +77,7 @@ app.get('/', function(req, res){
     });
 });
 
-app.post('/test', function(req, res){
+app.post('/', function(req, res){
 	var obj = {};
 	console.log('body: ' + JSON.stringify(req.body));
 	res.send(req.body);
@@ -85,76 +85,76 @@ app.post('/test', function(req, res){
 
 
 
-app.post('/', function(req, res){
-
-    var id = parseInt(req.body.id);
-
-    console.log( id.toString() )
-
-    var osc_port = req.body.oscPort
-
-    var temperature_interval = req.body.temperatureInterval;
-    var temperature_change = (req.body.temperatureChange != undefined ? 1 : 0);
-    var temperature_change_threshold = req.body.temperatureChangeThreshold;
-    var temperature_mqtt = (req.body.temperatureMQTT != undefined ? 1 : 0);
-    var temperature_osc = (req.body.temperatureOSC != undefined ? 1 : 0);
-
-    var pressure_interval = req.body.pressureInterval;
-    var pressure_change = (req.body.pressureChange != undefined ? 1 : 0);
-    var pressure_change_threshold = req.body.pressureChangeThreshold;
-    var pressure_mqtt = (req.body.pressureMQTT != undefined ? 1 : 0);
-    var pressure_osc = (req.body.pressureOSC != undefined ? 1 : 0);
-
-    var light_interval = req.body.lightInterval;
-    var light_change = (req.body.lightChange != undefined ? 1 : 0);
-    var light_change_threshold = req.body.lightChangeThreshold;
-    var light_mqtt = (req.body.lightMQTT != undefined ? 1 : 0);
-    var light_osc = (req.body.lightOSC != undefined ? 1 : 0);
-
-    var pedestrians_interval = req.body.pedestriansInterval;
-    var pedestrians_change = (req.body.pedestriansChange != undefined ? 1 : 0);
-    var pedestrians_change_threshold = req.body.pedestriansChangeThreshold;
-    var pedestrians_mqtt = (req.body.pedestriansMQTT != undefined ? 1 : 0);
-    var pedestrians_osc = (req.body.pedestriansOSC != undefined ? 1 : 0);
-
-    var s = osc_port + ','
-
-    s += temperature_interval + ','
-    s += temperature_change + ','
-    s += temperature_change_threshold + ','
-    s += temperature_mqtt + ','
-    s += temperature_osc + ','
-
-    s += pressure_interval + ','
-    s += pressure_change + ','
-    s += pressure_change_threshold + ','
-    s += pressure_mqtt + ','
-    s += pressure_osc + ','
-
-    s += light_interval + ','
-    s += light_change + ','
-    s += light_change_threshold + ','
-    s += light_mqtt + ','
-    s += light_osc + ','
-
-    s += pedestrians_interval + ','
-    s += pedestrians_change + ','
-    s += pedestrians_change_threshold + ','
-    s += pedestrians_mqtt + ','
-    s += pedestrians_osc
-
-    if ( id == 0) {
-        for (i = 1; i < 10; i++) {
-            client.publish('parken/rpi/' + i + '/settings', s)
-        }
-    } else {
-        client.publish('parken/rpi/' + id + '/settings', s)
-    }
-
-    setTimeout(function() {
-        res.redirect(req.get('referer'));
-    }, 2000);
-});
+// app.post('/', function(req, res){
+//
+//     var id = parseInt(req.body.id);
+//
+//     console.log( id.toString() )
+//
+//     var osc_port = req.body.oscPort
+//
+//     var temperature_interval = req.body.temperatureInterval;
+//     var temperature_change = (req.body.temperatureChange != undefined ? 1 : 0);
+//     var temperature_change_threshold = req.body.temperatureChangeThreshold;
+//     var temperature_mqtt = (req.body.temperatureMQTT != undefined ? 1 : 0);
+//     var temperature_osc = (req.body.temperatureOSC != undefined ? 1 : 0);
+//
+//     var pressure_interval = req.body.pressureInterval;
+//     var pressure_change = (req.body.pressureChange != undefined ? 1 : 0);
+//     var pressure_change_threshold = req.body.pressureChangeThreshold;
+//     var pressure_mqtt = (req.body.pressureMQTT != undefined ? 1 : 0);
+//     var pressure_osc = (req.body.pressureOSC != undefined ? 1 : 0);
+//
+//     var light_interval = req.body.lightInterval;
+//     var light_change = (req.body.lightChange != undefined ? 1 : 0);
+//     var light_change_threshold = req.body.lightChangeThreshold;
+//     var light_mqtt = (req.body.lightMQTT != undefined ? 1 : 0);
+//     var light_osc = (req.body.lightOSC != undefined ? 1 : 0);
+//
+//     var pedestrians_interval = req.body.pedestriansInterval;
+//     var pedestrians_change = (req.body.pedestriansChange != undefined ? 1 : 0);
+//     var pedestrians_change_threshold = req.body.pedestriansChangeThreshold;
+//     var pedestrians_mqtt = (req.body.pedestriansMQTT != undefined ? 1 : 0);
+//     var pedestrians_osc = (req.body.pedestriansOSC != undefined ? 1 : 0);
+//
+//     var s = osc_port + ','
+//
+//     s += temperature_interval + ','
+//     s += temperature_change + ','
+//     s += temperature_change_threshold + ','
+//     s += temperature_mqtt + ','
+//     s += temperature_osc + ','
+//
+//     s += pressure_interval + ','
+//     s += pressure_change + ','
+//     s += pressure_change_threshold + ','
+//     s += pressure_mqtt + ','
+//     s += pressure_osc + ','
+//
+//     s += light_interval + ','
+//     s += light_change + ','
+//     s += light_change_threshold + ','
+//     s += light_mqtt + ','
+//     s += light_osc + ','
+//
+//     s += pedestrians_interval + ','
+//     s += pedestrians_change + ','
+//     s += pedestrians_change_threshold + ','
+//     s += pedestrians_mqtt + ','
+//     s += pedestrians_osc
+//
+//     if ( id == 0) {
+//         for (i = 1; i < 10; i++) {
+//             client.publish('parken/rpi/' + i + '/settings', s)
+//         }
+//     } else {
+//         client.publish('parken/rpi/' + id + '/settings', s)
+//     }
+//
+//     setTimeout(function() {
+//         res.redirect(req.get('referer'));
+//     }, 2000);
+// });
 
 
 // get unit timestamp
