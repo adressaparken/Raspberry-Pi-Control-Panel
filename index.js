@@ -207,7 +207,7 @@ client.on('message', function (topic, message) {
 
     if ( hearbeat.test(topic.toString()) ) {
 
-        console.log( topic + " " + message.toString() )
+        // console.log( topic + " " + message.toString() )
 
         rpis[id - 1].last_hearbeat = get_time();
 
