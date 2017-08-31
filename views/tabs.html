@@ -111,7 +111,7 @@
           <tr>
             <td>Temperature:</td>
             <td>
-              <div id="temp<%= rpi.id %>"><%= rpi.temperature_value %></div>&#x2103;
+              <div id="temp<%= rpi.id %>"><%= rpi.temperature_value %> &#x2103;</div>
             </td>
           </tr>
 
@@ -236,6 +236,8 @@
         openTab: localStorage.activeTab
       },
       function(data) {
+        // $("#temp1").html(data.temperature_value &#x2103;);
+        $("#temp1").html(data.pressure_value &#x2103;);
         console.log(JSON.stringify(data))
 
       });
