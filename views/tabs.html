@@ -234,15 +234,19 @@ function testFunction() {
   data.title = "title";
   data.message = "message";
 
-  $.ajax({
-    type: 'POST',
-    data: data,
-    url: '/',
-    dataType: 'JSON',
-    success: function() {
-      alert("FUCK YEAH!");
-    }
+  $.post("/", {title: 'FUCK'}, function(data) {
+    console.log(data)
   });
+
+  // $.ajax({
+  //   type: 'POST',
+  //   data: data,
+  //   url: '/',
+  //   dataType: 'JSON',
+  //   success: function() {
+  //     alert("FUCK YEAH!");
+  //   }
+  // });
 
   // $.ajax({
   //   type: 'POST',
