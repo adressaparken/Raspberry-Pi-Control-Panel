@@ -229,38 +229,13 @@
 </script>
 
 <script>
-function testFunction() {
-  var data = {};
-  data.title = "title";
-  data.message = "message";
-
-  $.post("/", {
-    id: -1,
-    title: 'FUCK'},
-    function(data) {
-      console.log(data)
-  });
-
-  // $.ajax({
-  //   type: 'POST',
-  //   data: data,
-  //   url: '/',
-  //   dataType: 'JSON',
-  //   success: function() {
-  //     alert("FUCK YEAH!");
-  //   }
-  // });
-
-  // $.ajax({
-  //   type: 'POST',
-  //   data: JSON.stringify(data),
-  //   contentType: 'application/json',
-  //   url: 'http://localhost:8080/endpoint',
-  //   success: function(data) {
-  //     console.log('success');
-  //     console.log(JSON.stringify(data));
-  //     alert(JSON.stringify(data));
-  //   }
-  // });
+  window.setInterval(function(){
+    $.post("/", {
+      id: -1,
+      title: 'FUCK'},
+      function(data) {
+        alert(JSON.stringify(data))
+    });
+  }, 10000);
 }
 </script>
