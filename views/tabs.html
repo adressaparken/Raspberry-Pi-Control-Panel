@@ -229,20 +229,24 @@
 </script>
 
 <script>
-  window.onload = function() {
-    alert("FUCK THIS");
-    setInterval(function(){
-      alert("FUCK");
-    }, 5000);
-  };
+  function reloadTimer() {
+    alert("FuCK YeaH!");
+  }
 
-  window.setInterval(function(){
-    $.post("/", {
-      id: -1,
-      title: 'FUCK'},
-      function(data) {
-        alert(JSON.stringify(data))
-    });
-  }, 10000);
-}
+//   window.onload = function() {
+//     alert("FUCK THIS");
+//     setInterval(function(){
+//       alert("FUCK");
+//     }, 5000);
+//   };
+//
+//   window.setInterval(function(){
+//     $.post("/", {
+//       id: -1,
+//       title: 'FUCK'},
+//       function(data) {
+//         alert(JSON.stringify(data))
+//     });
+//   }, 10000);
+// }
 </script>
