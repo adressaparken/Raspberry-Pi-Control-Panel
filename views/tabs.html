@@ -21,6 +21,7 @@
   </p>
 
   <h3>Global settings:</h3>
+  <button onclick="testFunction()">Click me</button>
   <p>
     <form name="form1" method="POST" action="/">
       <input type="hidden" name="id" value=0>
@@ -225,4 +226,24 @@
     localStorage.activeTab = "GlobalTab"
     document.getElementById(localStorage.activeTab).click();
   }
+</script>
+
+<script>
+function testFunction() {
+  var data = {};
+  data.title = "title";
+  data.message = "message";
+
+  $.ajax({
+    type: 'POST',
+    data: JSON.stringify(data),
+    contentType: 'application/json',
+    url: 'http://localhost:8080/endpoint',
+    success: function(data) {
+      console.log('success');
+      console.log(JSON.stringify(data));
+      alert(JSON.stringify(data));
+    }
+  });
+}
 </script>
