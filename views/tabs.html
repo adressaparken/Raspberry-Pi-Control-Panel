@@ -229,10 +229,12 @@
 </script>
 
 <script>
-  setInterval(function(){
-    alert("FUCK");
-  }, 5000);
-
+  function reload() {
+    setInterval(function(){
+      alert("FUCK");
+    }, 5000);
+  };
+  
   window.setInterval(function(){
     $.post("/", {
       id: -1,
