@@ -84,6 +84,9 @@ app.post('/', function(req, res){
   console.log( id.toString() )
 
   if (id == -1) {
+    if (req.body.openTab == "GlobalTab") {
+      console.log("FUCK");
+    }
     console.log('body: ' + JSON.stringify(req.body));
   	res.send(req.body);
   }
