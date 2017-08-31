@@ -86,6 +86,9 @@ table.greyGridTable tbody td {
 table.greyGridTable td:nth-child(even) {
   background: #EBEBEB;
 }
+table.greyGridTable td.offline {
+  background: #ff6b6b;
+}
 table.greyGridTable td:nth-child(odd) {
   text-align: right;
 }

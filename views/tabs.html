@@ -12,7 +12,7 @@
       <table class="greyGridTable">
         <tr>
           <td width="250px">Raspberry Pi #<%= rpi.id %>:</td>
-          <td>
+          <td <% if (!rpi.status) {%> class="offline" <%}%>>
             <% if (rpi.status) {%> online. <%} else {%> offline. Last seen: <%= new Date(rpi.last_hearbeat * 1000).toISOString().replace(/T/, ' ').replace(/\..+/, '') %> <% } %>
           </td>
         </tr>
