@@ -111,28 +111,28 @@
           <tr>
             <td>Temperature:</td>
             <td>
-              <div id="temp<%= rpi.id %>"><%= rpi.temperature_value %> &#x2103;</div>
+              <div id="t<%= rpi.id %>"><%= rpi.temperature_value %> &#x2103;</div>
             </td>
           </tr>
 
           <tr>
             <td>Pressure:</td>
             <td>
-              <%= rpi.pressure_value %> hPa
+              <div id="p<%= rpi.id %>"<%= rpi.pressure_value %> hPa</div>
             </td>
           </tr>
 
           <tr>
             <td>Light:</td>
             <td>
-              <%= rpi.light_value %> lux
+              <div id="l<%= rpi.id %>"><%= rpi.light_value %> lux</div>
             </td>
           </tr>
 
           <tr>
             <td>Pedestrian count:</td>
             <td>
-              <%= rpi.pedestrians_value %>
+              <div id="pe<%= rpi.id %>"><%= rpi.pedestrians_value %></div>
             </td>
           </tr>
 
@@ -236,11 +236,18 @@
         openTab: localStorage.activeTab
       },
       function(data) {
-        var d = "#temp" + data.id
-        // $(d).html(data.temperature_value + " &#x2103;");
-        $(d).html(data.temperature_value + " aa&#x2103;");
-        alert(data.pressure_value);
-        console.log(JSON.stringify(data))
+
+        var t_div = "#t" + data.id
+        $(t_div).html(data.temperature_value + " &#x2103;");
+
+        var p_div = "#p" + data.id
+        $(p_div).html(data.pressure_value + " hPa");
+
+        var l_div = "#l" + data.id
+        $(l_div).html(data.light_value + " lux");
+
+        var pe_div = "#pe" + data.id
+        $(pe_div).html(data.pedestrians_value);
 
       });
     }, 10000);
