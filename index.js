@@ -77,7 +77,7 @@ app.get('/', function(req, res){
     });
 });
 
-app.post('/endpoint', function(req, res){
+app.post('/test', function(req, res){
 	var obj = {};
 	console.log('body: ' + JSON.stringify(req.body));
 	res.send(req.body);

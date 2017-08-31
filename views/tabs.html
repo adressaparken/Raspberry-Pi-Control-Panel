@@ -234,14 +234,15 @@ function testFunction() {
   data.title = "title";
   data.message = "message";
 
-  $.post("/endpoint",
-    {
-        name: "Donald Duck",
-        city: "Duckburg"
-    },
-    function(data, status){
-        alert("Data: " + data + "\nStatus: " + status);
-    });
+  $.ajax({
+    type: 'POST',
+    data: data,
+    url: '/test',
+    dataType: 'JSON',
+    success: function() {
+      alert("FUCK YEAH!");
+    }
+  });
 
   // $.ajax({
   //   type: 'POST',
