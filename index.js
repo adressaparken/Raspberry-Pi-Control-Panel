@@ -86,9 +86,12 @@ app.post('/', function(req, res){
   if (id == -1) {
     if (req.body.openTab == "GlobalTab") {
       console.log("FUCK");
+    } else {
+      var i = parseInt(req.body.openTab.substring(3, 4));
+      res.send(rpis[i-1]);
     }
-    console.log('body: ' + JSON.stringify(req.body));
-  	res.send(req.body);
+    // console.log('body: ' + JSON.stringify(req.body));
+  	// res.send(req.body);
   }
 });
 
