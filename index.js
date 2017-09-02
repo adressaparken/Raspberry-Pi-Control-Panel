@@ -85,6 +85,8 @@ app.post('/', function(req, res){
 
   var id = parseInt(req.body.id);
 
+  console.log(id.toString())
+
   if (id == -1) {
     if (req.body.openTab == "GlobalTab") {
       // todo reload status
@@ -92,7 +94,7 @@ app.post('/', function(req, res){
       var i = parseInt(req.body.openTab.substring(3, 4));
       res.send(rpis[i-1]);
     }
-  } else if (id >= 1 && id <= 9) {
+} else if (id >= 0 && id <= 9) {
 
     var osc_port = req.body.oscPort
 
