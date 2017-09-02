@@ -217,33 +217,41 @@ client.on('message', function (topic, message) {
 
         rpis[id - 1].osc_port = parseInt(values[0]);
 
-        rpis[id - 1].temperature_on_interval = values[1] == 1;
-        rpis[id - 1].temperature_interval = parseInt(values[2]);
-        rpis[id - 1].temperature_change = values[3] == 1;
-        rpis[id - 1].temperature_change_threshold = parseFloat(values[4]);
-        rpis[id - 1].temperature_mqtt = values[5] == 1;
-        rpis[id - 1].temperature_osc = values[6] == 1;
+        // parseInt(values[1]) = ID
+        // values[2] = name
+        rpis[id - 1].temperature_on_interval = values[3] == 1;
+        rpis[id - 1].temperature_interval = parseInt(values[4]);
+        rpis[id - 1].temperature_change = values[5] == 1;
+        rpis[id - 1].temperature_change_threshold = parseFloat(values[6]);
+        rpis[id - 1].temperature_mqtt = values[7] == 1;
+        rpis[id - 1].temperature_osc = values[8] == 1;
 
-        rpis[id - 1].pressure_on_interval = values[7] == 1;
-        rpis[id - 1].pressure_interval = parseInt(values[8]);
-        rpis[id - 1].pressure_change = values[9] == 1;
-        rpis[id - 1].pressure_change_threshold = parseFloat(values[10]);
-        rpis[id - 1].pressure_mqtt = values[11] == 1;
-        rpis[id - 1].pressure_osc = values[12] == 1;
+        // parseInt(values[9]) = ID
+        // values[10] = name
+        rpis[id - 1].pressure_on_interval = values[11] == 1;
+        rpis[id - 1].pressure_interval = parseInt(values[12]);
+        rpis[id - 1].pressure_change = values[13] == 1;
+        rpis[id - 1].pressure_change_threshold = parseFloat(values[14]);
+        rpis[id - 1].pressure_mqtt = values[15] == 1;
+        rpis[id - 1].pressure_osc = values[16] == 1;
 
-        rpis[id - 1].light_on_interval = values[13] == 1;
-        rpis[id - 1].light_interval = parseInt(values[14]);
-        rpis[id - 1].light_change = values[15] == 1;
-        rpis[id - 1].light_change_threshold = parseInt(values[16]);
-        rpis[id - 1].light_mqtt = values[17] == 1;
-        rpis[id - 1].light_osc = values[18] == 1;
+        // parseInt(values[17]) = ID
+        // values[18] = name
+        rpis[id - 1].light_on_interval = values[19] == 1;
+        rpis[id - 1].light_interval = parseInt(values[20]);
+        rpis[id - 1].light_change = values[21] == 1;
+        rpis[id - 1].light_change_threshold = parseInt(values[22]);
+        rpis[id - 1].light_mqtt = values[23] == 1;
+        rpis[id - 1].light_osc = values[24] == 1;
 
-        rpis[id - 1].pedestrians_on_interval = values[19] == 1;
-        rpis[id - 1].pedestrians_interval = parseInt(values[20]);
-        rpis[id - 1].pedestrians_change = values[21] == 1;
-        rpis[id - 1].pedestrians_change_threshold = parseInt(values[22]);
-        rpis[id - 1].pedestrians_mqtt = values[23] == 1;
-        rpis[id - 1].pedestrians_osc = values[24] == 1;
+        // parseInt(values[25]) = ID
+        // values[26] = name
+        rpis[id - 1].pedestrians_on_interval = values[27] == 1;
+        rpis[id - 1].pedestrians_interval = parseInt(values[28]);
+        rpis[id - 1].pedestrians_change = values[29] == 1;
+        rpis[id - 1].pedestrians_change_threshold = parseInt(values[30]);
+        rpis[id - 1].pedestrians_mqtt = values[31] == 1;
+        rpis[id - 1].pedestrians_osc = values[32] == 1;
 
     } else if ( temperature.test(topic.toString()) ) {
 
