@@ -36,7 +36,7 @@ function RPi(id) {
     this.id = id;
     this.status = false;
     this.last_hearbeat = 0;
-    this.osc_port = 5005;
+    this.osc_port = 8008;
     this.temperature_value = 0;
     this.temperature_on_interval = true;
     this.temperature_interval = 5;
@@ -84,8 +84,6 @@ app.get('/', function(req, res){
 app.post('/', function(req, res){
 
   var id = parseInt(req.body.id);
-
-  console.log(id.toString())
 
   if (id == -1) {
     if (req.body.openTab == "GlobalTab") {
