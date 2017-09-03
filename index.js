@@ -86,12 +86,13 @@ app.post('/', function(req, res){
   var id = parseInt(req.body.id);
 
   if (id == -1) {
-    if (req.body.openTab == "GlobalTab") {
-      // todo reload status
-    } else {
-      var i = parseInt(req.body.openTab.substring(3, 4));
-      res.send(rpis[i-1]);
-    }
+    res.send(rpis);
+    // if (req.body.openTab == "GlobalTab") {
+    //   res.send(rpis);
+    // } else {
+    //   var i = parseInt(req.body.openTab.substring(3, 4));
+    //   res.send(rpis[i-1]);
+    // }
 } else if (id >= 0 && id <= 9) {
 
     var osc_port = req.body.oscPort
