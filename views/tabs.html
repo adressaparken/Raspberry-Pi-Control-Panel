@@ -159,7 +159,7 @@
 
             <tr>
               <td width="250px">Last heartbeat message received:</td>
-              <td>
+              <td id="h<%= rpi.id %>">
                 <%= new Date(rpi.last_hearbeat * 1000).toISOString().replace(/T/, ' ').replace(/\..+/, '') %>
               </td>
             </tr>
@@ -413,6 +413,7 @@
       if (rpi.status) {
 
         // RPi values
+        $("#h" + id).html(new Date(rpi.last_hearbeat * 1000).toISOString().replace(/T/, ' ').replace(/\..+/, ''));
         $("#t" + id).html(rpi.temperature_value + " &#x2103;");
         $("#p" + id).html(rpi.pressure_value + " hPa");
         $("#l" + id).html(rpi.light_value + " lux");
