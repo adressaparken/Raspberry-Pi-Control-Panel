@@ -361,37 +361,6 @@
       }
     });
 
-    // global settings
-    $('#globalOscPort').val(rpis[0].osc_port);
-
-    $('#globalTemperatureMQTT').prop('checked', rpis[0].temperature_mqtt);
-    $('#globalTemperatureOSC').prop('checked', rpis[0].temperature_osc);
-    $('#globalTemperatureInterval').val(rpis[0].temperature_interval);
-    $('#globalTemperatureOnInterval').prop('checked', rpis[0].temperature_on_interval);
-    $('#globalTemperatureChangeThreshold').val(rpis[0].temperature_change_threshold);
-    $('#globalTemperatureChange').prop('checked', rpis[0].temperature_change);
-
-    $('#globalPressureMQTT').prop('checked', rpis[0].pressure_mqtt);
-    $('#globalPressureOSC').prop('checked', rpis[0].pressure_osc);
-    $('#globalPressureInterval').val(rpis[0].pressure_interval);
-    $('#globalPressureOnInterval').prop('checked', rpis[0].pressure_on_interval);
-    $('#globalPressureChangeThreshold').val(rpis[0].pressure_change_threshold);
-    $('#globalPressureChange').prop('checked', rpis[0].pressure_change);
-
-    $('#globalLightMQTT').prop('checked', rpis[0].light_mqtt);
-    $('#globalLightOSC').prop('checked', rpis[0].light_osc);
-    $('#globalLightInterval').val(rpis[0].light_interval);
-    $('#globalLightOnInterval').prop('checked', rpis[0].light_on_interval);
-    $('#globalLightChangeThreshold').val(rpis[0].light_change_threshold);
-    $('#globalLightChange').prop('checked', rpis[0].light_change);
-
-    $('#globalPedestriansMQTT').prop('checked', rpis[0].pedestrians_mqtt);
-    $('#globalPedestriansOSC').prop('checked', rpis[0].pedestrians_osc);
-    $('#globalPedestriansInterval').val(rpis[0].pedestrians_interval);
-    $('#globalPedestriansOnInterval').prop('checked', rpis[0].pedestrians_on_interval);
-    $('#globalPedestriansChangeThreshold').val(rpis[0].pedestrians_change_threshold);
-    $('#globalPedestriansChange').prop('checked', rpis[0].pedestrians_change);
-
     //
     rpis.forEach((rpi) => {
       var id = rpi.id;
@@ -418,37 +387,6 @@
         $("#p" + id).html(rpi.pressure_value + " hPa");
         $("#l" + id).html(rpi.light_value + " lux");
         $("#pe" + id).html(rpi.pedestrians_value);
-
-        // RPi settings
-        $('#oscPort' + id).val(rpi.osc_port);
-
-        $('#temperatureMQTT' + id).prop('checked', rpi.temperature_mqtt);
-        $('#temperatureOSC' + id).prop('checked', rpi.temperature_osc);
-        $('#temperatureInterval' + id).val(rpi.temperature_interval);
-        $('#temperatureOnInterval' + id).prop('checked', rpi.temperature_on_interval);
-        $('#temperatureChangeThreshold' + id).val(rpi.temperature_change_threshold);
-        $('#temperatureChange' + id).prop('checked', rpi.temperature_change);
-
-        $('#pressureMQTT' + id).prop('checked', rpi.pressure_mqtt);
-        $('#pressureOSC' + id).prop('checked', rpi.pressure_osc);
-        $('#pressureInterval' + id).val(rpi.pressure_interval);
-        $('#pressureOnInterval' + id).prop('checked', rpi.pressure_on_interval);
-        $('#pressureChangeThreshold' + id).val(rpi.pressure_change_threshold);
-        $('#pressureChange' + id).prop('checked', rpi.pressure_change);
-
-        $('#lightMQTT' + id).prop('checked', rpi.light_mqtt);
-        $('#lightOSC' + id).prop('checked', rpi.light_osc);
-        $('#lightInterval' + id).val(rpi.light_interval);
-        $('#lightOnInterval' + id).prop('checked', rpi.light_on_interval);
-        $('#lightChangeThreshold' + id).val(rpi.light_change_threshold);
-        $('#lightChange' + id).prop('checked', rpi.light_change);
-
-        $('#pedestriansMQTT' + id).prop('checked', rpi.pedestrians_mqtt);
-        $('#pedestriansOSC' + id).prop('checked', rpi.pedestrians_osc);
-        $('#pedestriansInterval' + id).val(rpi.pedestrians_interval);
-        $('#pedestriansOnInterval' + id).prop('checked', rpi.pedestrians_on_interval);
-        $('#pedestriansChangeThreshold' + id).val(rpi.pedestrians_change_threshold);
-        $('#pedestriansChange' + id).prop('checked', rpi.pedestrians_change);
       }
     });
 
