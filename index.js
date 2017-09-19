@@ -36,6 +36,7 @@ function RPi(id) {
     this.id = id;
     this.status = false;
     this.last_hearbeat = 0;
+    this.last_hearbeat_formatted = "Never";
     this.osc_port = 8008;
     this.temperature_value = 0;
     this.temperature_on_interval = true;
@@ -177,6 +178,16 @@ function get_time() {
     return Math.floor(new Date() / 1000);
 }
 
+function get_time_formatted() {
+  var options = {
+    timeZone: 'Europe/Oslo',
+    year: 'numeric', month: 'numeric', day: 'numeric',
+    hour: 'numeric', minute: 'numeric', second: 'numeric',
+  }
+  formatter = new Intl.DateTimeFormat([], options)
+  return formatter.format(new Date())
+}
+
 var myInt = setInterval(function () {
     rpis.forEach(function(rpi) {
         if (get_time() >= rpi.last_hearbeat + 300) {
@@ -211,6 +222,7 @@ client.on('message', function (topic, message) {
         // console.log( topic + " " + message.toString() )
 
         rpis[id - 1].last_hearbeat = get_time();
+        rpis[id - 1].last_hearbeat_formatted = get_time_formatted();
 
         rpis[id - 1].status = true;
 

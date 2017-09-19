@@ -13,7 +13,7 @@
         <tr>
           <td width="250px">Raspberry Pi #<%= rpi.id %>:</td>
           <td id="rpistatus<%= rpi.id %>" <% if (!rpi.status) {%> class="offline" <%}%>>
-            <% if (rpi.status) {%> Online. <%} else {%> Offline. Last seen: <%= new Date(rpi.last_hearbeat * 1000).toISOString().replace(/T/, ' ').replace(/\..+/, '') %> <% } %>
+            <% if (rpi.status) {%> Online. <%} else {%> Offline. Last seen: <%= rpi.last_hearbeat_formatted %> <% } %>
           </td>
         </tr>
       </table>
@@ -147,7 +147,7 @@
     <h3 id="RPiHeader<%= rpi.id %>">Raspberry Pi #<%= rpi.id %> is currently <% if (rpi.status) {%> online. <%} else {%> offline. <% } %></h3>
 
     <div id="rpioffline<%= rpi.id %>" class="text" <% if (rpi.status) {%> style="display:none;" <%}%>>
-      <p>Last seen: <%= new Date(rpi.last_hearbeat * 1000).toISOString().replace(/T/, ' ').replace(/\..+/, '') %></p>
+      <p>Last seen: <%= rpi.last_hearbeat_formatted %></p>
       <p>Settings cannot be changed for offline Raspberry Pis.</br>
       If it does not come online in the next 10 minutes, please contact the system administrator.</br>
       Sorry for the inconvenience!</p>
@@ -160,7 +160,7 @@
             <tr>
               <td width="250px">Last heartbeat message received:</td>
               <td id="h<%= rpi.id %>">
-                <%= new Date(rpi.last_hearbeat * 1000).toISOString().replace(/T/, ' ').replace(/\..+/, '') %>
+                <%= rpi.last_hearbeat_formatted %>
               </td>
             </tr>
 
@@ -357,7 +357,7 @@
       } else {
         $("#RPi" + id).addClass("offline");
         $("#rpistatus" + id).addClass("offline");
-        $("#rpistatus" + id).html("Offline. Last seen: " + new Date(rpi.last_hearbeat * 1000).toISOString().replace(/T/, ' ').replace(/\..+/, ''));
+        $("#rpistatus" + id).html("Offline. Last seen: " + rpi.last_hearbeat_formatted);
       }
     });
 
