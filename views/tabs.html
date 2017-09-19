@@ -382,7 +382,7 @@
       if (rpi.status) {
 
         // RPi values
-        $("#h" + id).html(new Date(rpi.last_hearbeat * 1000).toISOString().replace(/T/, ' ').replace(/\..+/, ''));
+        $("#h" + id).html(rpi.last_hearbeat_formatted);
         $("#t" + id).html(rpi.temperature_value + " &#x2103;");
         $("#p" + id).html(rpi.pressure_value + " hPa");
         $("#l" + id).html(rpi.light_value + " lux");
